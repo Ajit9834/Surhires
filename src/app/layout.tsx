@@ -48,15 +48,9 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-// Runs before first paint so the stored theme is applied without a flash.
-const themeScript = `(function(){try{var stored=localStorage.getItem("theme");var dark=stored?stored==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.classList.toggle("dark",dark);}catch(e){}})();`;
-
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={geistSans.variable} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
+    <html lang="en" className={geistSans.variable}>
       <body className="flex min-h-screen flex-col antialiased">
         <a href="#main-content" className="skip-link">
           Skip to main content

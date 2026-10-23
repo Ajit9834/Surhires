@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/layout/logo";
-import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { buttonClasses } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -84,7 +83,6 @@ export function Navbar() {
             >
               Post a Job
             </Link>
-            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Trigger */}
@@ -173,10 +171,6 @@ export function Navbar() {
                 >
                   Post a Job
                 </Link>
-                <ThemeToggle
-                  withLabel
-                  className="w-full justify-center sm:col-span-2"
-                />
               </div>
             </nav>
           </Container>

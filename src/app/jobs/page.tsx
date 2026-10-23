@@ -44,7 +44,7 @@ export default async function JobsPage({
         />
 
         <Container className="relative z-10">
-          <div className="animate-rise max-w-[700px]">
+          <div className="animate-fade-up max-w-[700px]">
             <Badge tone="teal" dot>
               12 sample openings across India &amp; remote
             </Badge>
