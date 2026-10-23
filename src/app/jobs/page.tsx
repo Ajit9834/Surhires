@@ -44,8 +44,8 @@ export default async function JobsPage({
         />
 
         <Container className="relative z-10">
-          <div className="animate-fade-up max-w-[700px]">
-            <Badge tone="teal" dot>
+          <div className="max-w-[700px]">
+            <Badge tone="teal" dot className="animate-fade-up">
               12 sample openings across India &amp; remote
             </Badge>
 
@@ -56,7 +56,7 @@ export default async function JobsPage({
               Find work that moves you forward
             </h1>
 
-            <p className="mt-4 max-w-[60ch] text-base leading-relaxed text-[#596579] sm:text-lg">
+            <p className="animate-fade-up delay-75 mt-4 max-w-[60ch] text-base leading-relaxed text-[#596579] sm:text-lg">
               Every card below displays compensation ranges, location rules, and
               role highlights up front. Filter in real time or open any listing
               to preview the full brief.

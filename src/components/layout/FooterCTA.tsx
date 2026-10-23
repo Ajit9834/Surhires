@@ -1,18 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Sparkles } from "lucide-react";
-
-const MotionLink = motion.create(Link);
+import { cn } from "@/lib/utils";
 
 export function FooterCTA() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+    <div
       className="relative rounded-[26px] bg-gradient-to-r from-[#7C3AED]/75 via-[#0D9488]/70 to-[#F97360]/60 p-[1.5px] shadow-[0_22px_50px_-26px_rgba(124,58,237,0.28)]"
     >
       <div className="relative overflow-hidden rounded-[24.5px] bg-gradient-to-br from-[#F4F3FF] via-white to-[#CCFBF1]/45 px-6 py-8 sm:px-10 sm:py-10 lg:px-12 lg:py-11">
@@ -47,36 +41,30 @@ export function FooterCTA() {
           </div>
 
           <div className="flex flex-col gap-3.5 sm:flex-row sm:items-center lg:shrink-0">
-            <MotionLink
+            <Link
               href="/jobs"
-              whileHover={{ y: -2, scale: 1.015 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.16, ease: "easeOut" }}
-              className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-[14px] bg-[#7C3AED] px-6 py-3 text-[0.96875rem] font-semibold text-white shadow-[0_12px_28px_-8px_rgba(124,58,237,0.55)] transition-colors duration-150 hover:bg-[#6D28D9] hover:shadow-[0_16px_34px_-6px_rgba(124,58,237,0.68)] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#7C3AED] sm:w-auto"
+              className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-[14px] bg-[#7C3AED] px-6 py-3 text-[0.96875rem] font-semibold text-white shadow-[0_12px_28px_-8px_rgba(124,58,237,0.55)] transition-all duration-150 ease-out hover:-translate-y-0.5 hover:scale-[1.015] active:scale-[0.98] hover:bg-[#6D28D9] hover:shadow-[0_16px_34px_-6px_rgba(124,58,237,0.68)] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#7C3AED] sm:w-auto"
             >
               <span>Explore Jobs</span>
               <ArrowRight
                 aria-hidden="true"
                 className="size-4 transition-transform duration-150 group-hover:translate-x-0.5"
               />
-            </MotionLink>
+            </Link>
 
-            <MotionLink
+            <Link
               href="/employers"
-              whileHover={{ y: -2, scale: 1.015 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.16, ease: "easeOut" }}
-              className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-[14px] border-2 border-[#0D9488]/40 bg-white px-6 py-3 text-[0.96875rem] font-semibold text-[#115E59] shadow-[0_10px_24px_-12px_rgba(13,148,136,0.3)] transition-colors duration-150 hover:border-[#0D9488] hover:bg-[#0D9488] hover:text-white hover:shadow-[0_16px_32px_-8px_rgba(13,148,136,0.45)] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#7C3AED] sm:w-auto"
+              className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-[14px] border-2 border-[#0D9488]/40 bg-white px-6 py-3 text-[0.96875rem] font-semibold text-[#115E59] shadow-[0_10px_24px_-12px_rgba(13,148,136,0.3)] transition-all duration-150 ease-out hover:-translate-y-0.5 hover:scale-[1.015] active:scale-[0.98] hover:border-[#0D9488] hover:bg-[#0D9488] hover:text-white hover:shadow-[0_16px_32px_-8px_rgba(13,148,136,0.45)] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#7C3AED] sm:w-auto"
             >
               <span>Hire Talent</span>
               <ArrowUpRight
                 aria-hidden="true"
                 className="size-4 text-[#0D9488] transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white"
               />
-            </MotionLink>
+            </Link>
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

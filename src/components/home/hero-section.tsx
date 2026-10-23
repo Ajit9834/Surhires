@@ -27,8 +27,8 @@ export function HeroSection() {
       <Container className="relative z-10">
         <div className="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14">
           {/* Left column: Reading order -> Eyebrow, Headline, Copy, CTAs, Compact Search */}
-          <div className="animate-fade-up">
-            <Badge tone="violet" dot>
+          <div>
+            <Badge tone="violet" dot className="animate-fade-up">
               A better way to find your next opportunity
             </Badge>
 
@@ -39,13 +39,13 @@ export function HeroSection() {
               </span>
             </h1>
 
-            <p className="mt-5 max-w-[56ch] text-base leading-relaxed text-[#596579] sm:text-lg">
+            <p className="animate-fade-up delay-75 mt-5 max-w-[56ch] text-base leading-relaxed text-[#596579] sm:text-lg">
               Surhires connects thoughtful candidates with teams that are
               building meaningful work — with upfront salary bands, clear role
               expectations, and timely human updates.
             </p>
 
-            <div className="mt-7 flex flex-col gap-3.5 sm:flex-row sm:items-center">
+            <div className="animate-fade-up delay-150 mt-7 flex flex-col gap-3.5 sm:flex-row sm:items-center">
               <ButtonLink href="/jobs" variant="primary" size="lg">
                 Find a Job
               </ButtonLink>

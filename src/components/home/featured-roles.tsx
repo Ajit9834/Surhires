@@ -1,12 +1,16 @@
 "use client";
 
 import { useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import type { Job } from "@/types";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ButtonLink } from "@/components/ui/button";
 import { JobCard } from "@/components/jobs/job-card";
-import { JobPreviewModal } from "@/components/jobs/job-preview-modal";
+
+const JobPreviewModal = dynamic(() => import("@/components/jobs/job-preview-modal").then((mod) => mod.JobPreviewModal), {
+  ssr: false,
+});
 import { featuredJobs } from "@/data/sample-jobs";
 
 export function FeaturedRoles() {

@@ -1,11 +1,15 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import type { Job } from "@/types";
 import { JobFilters, type JobFilterValues } from "@/components/jobs/job-filters";
 import { JobCard } from "@/components/jobs/job-card";
-import { JobPreviewModal } from "@/components/jobs/job-preview-modal";
 import { EmptyState } from "@/components/jobs/empty-state";
+
+const JobPreviewModal = dynamic(() => import("@/components/jobs/job-preview-modal").then((mod) => mod.JobPreviewModal), {
+  ssr: false,
+});
 import { sampleJobs } from "@/data/sample-jobs";
 import { normalise } from "@/lib/utils";
 

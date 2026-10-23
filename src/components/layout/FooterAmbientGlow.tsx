@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 export function FooterAmbientGlow() {
   return (
     <div
@@ -23,31 +21,13 @@ export function FooterAmbientGlow() {
       />
 
       {/* Slowly drifting soft Violet glow on white */}
-      <motion.div
-        animate={{
-          x: [0, 22, 0],
-          y: [0, -14, 0],
-        }}
-        transition={{
-          duration: 14,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute -top-28 left-[8%] h-96 w-96 rounded-full bg-[#7C3AED]/[0.07] blur-[110px]"
+      <div
+        className="animate-drift-violet absolute -top-28 left-[8%] h-96 w-96 rounded-full bg-[#7C3AED]/[0.07] blur-[110px]"
       />
 
       {/* Slowly drifting soft Teal glow on white */}
-      <motion.div
-        animate={{
-          x: [0, -20, 0],
-          y: [0, 16, 0],
-        }}
-        transition={{
-          duration: 16,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-1/4 right-[6%] h-96 w-96 rounded-full bg-[#0D9488]/[0.07] blur-[115px]"
+      <div
+        className="animate-drift-teal absolute top-1/4 right-[6%] h-96 w-96 rounded-full bg-[#0D9488]/[0.07] blur-[115px]"
       />
 
       {/* Subtle warm Coral glow near bottom */}

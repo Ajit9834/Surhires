@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import dynamic from "next/dynamic";
 import { Geist } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
+
+const Footer = dynamic(() => import("@/components/layout/Footer").then((mod) => mod.Footer), {
+  ssr: true,
+});
 
 const geistSans = Geist({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-geist-sans",
+  preload: true,
+  fallback: ["ui-sans-serif", "system-ui", "-apple-system", "sans-serif"],
+  adjustFontFallback: true,
 });
 
 const siteUrl = "https://surhires.vercel.app";

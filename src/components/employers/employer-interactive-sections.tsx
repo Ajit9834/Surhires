@@ -1,10 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { PricingPlans } from "@/components/employers/pricing-plans";
-import { PostJobForm } from "@/components/employers/post-job-form";
+
+const PostJobForm = dynamic(() => import("@/components/employers/post-job-form").then((mod) => mod.PostJobForm), {
+  ssr: false,
+});
 
 export function EmployerInteractiveSections() {
   const [selectedPlan, setSelectedPlan] = useState<string>("growth");

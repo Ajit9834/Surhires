@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
 import { BriefcaseBusiness, ChevronRight } from "lucide-react";
 import { SocialLinks } from "@/components/layout/SocialLinks";
+import { cn } from "@/lib/utils";
 
 interface FooterLinkGroup {
   heading: string;
@@ -47,40 +47,11 @@ const footerLinkGroups: FooterLinkGroup[] = [
   },
 ];
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.04,
-    },
-  },
-};
-
-const columnVariants: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.44,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
-
 export function FooterLinks() {
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
-      className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr_1fr] lg:gap-12 lg:py-16"
-    >
+    <div className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr_1fr] lg:gap-12 lg:py-16">
       {/* Column 1 — Brand */}
-      <motion.div variants={columnVariants} className="max-w-sm">
+      <div className="max-w-sm">
         <Link
           href="/"
           aria-label="Surhires — Return to homepage"
@@ -104,13 +75,12 @@ export function FooterLinks() {
         </p>
 
         <SocialLinks />
-      </motion.div>
+      </div>
 
       {/* Columns 2, 3, 4 — Navigation Columns */}
       {footerLinkGroups.map((group) => (
-        <motion.nav
+        <nav
           key={group.heading}
-          variants={columnVariants}
           aria-label={group.heading}
         >
           <h2 className="text-[0.9375rem] font-bold tracking-tight text-[#172554]">
@@ -126,10 +96,16 @@ export function FooterLinks() {
                 >
                   <ChevronRight
                     aria-hidden="true"
-                    className={`size-3.5 -ml-0.5 text-[#94A3B8] transition-all duration-180 group-hover:translate-x-0.5 ${group.accentColor}`}
+                    className={cn(
+                      "size-3.5 -ml-0.5 text-[#94A3B8] transition-all duration-180 group-hover:translate-x-0.5",
+                      group.accentColor
+                    )}
                   />
                   <span
-                    className={`font-medium transition-colors duration-180 ${group.accentColor}`}
+                    className={cn(
+                      "font-medium transition-colors duration-180",
+                      group.accentColor
+                    )}
                   >
                     {link.label}
                   </span>
@@ -137,8 +113,8 @@ export function FooterLinks() {
               </li>
             ))}
           </ul>
-        </motion.nav>
+        </nav>
       ))}
-    </motion.div>
+    </div>
   );
 }

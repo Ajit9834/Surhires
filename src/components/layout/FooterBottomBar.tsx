@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowUp, ShieldCheck, Sparkles } from "lucide-react";
 
 export function FooterBottomBar() {
@@ -46,18 +45,15 @@ export function FooterBottomBar() {
           <span>Made for people and possibilities.</span>
         </p>
 
-        <motion.button
+        <button
           type="button"
           onClick={scrollToTop}
           aria-label="Scroll back to top of page"
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.96 }}
-          transition={{ duration: 0.16, ease: "easeOut" }}
-          className="inline-flex min-h-11 w-fit cursor-pointer items-center gap-2 rounded-xl border border-[#E5E7EB] bg-[#FFFCF7] px-4 py-2 text-xs font-semibold text-[#172554] transition-colors duration-150 hover:border-[#7C3AED] hover:bg-[#EDE9FE] hover:text-[#5B21B6] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#7C3AED]"
+          className="inline-flex min-h-11 w-fit cursor-pointer items-center gap-2 rounded-xl border border-[#E5E7EB] bg-[#FFFCF7] px-4 py-2 text-xs font-semibold text-[#172554] transition-all duration-150 ease-out hover:-translate-y-0.5 active:scale-95 hover:border-[#7C3AED] hover:bg-[#EDE9FE] hover:text-[#5B21B6] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#7C3AED]"
         >
           <span>Back to top</span>
           <ArrowUp aria-hidden="true" className="size-3.5 text-[#7C3AED]" />
-        </motion.button>
+        </button>
       </div>
     </div>
   );

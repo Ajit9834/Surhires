@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface SocialItem {
   id: "linkedin" | "instagram" | "x";
@@ -78,7 +78,10 @@ const socialItems: SocialItem[] = [
 ];
 
 const sharedButtonClasses =
-  "grid size-11 cursor-pointer place-items-center rounded-xl border border-[#E5E7EB] bg-[#FFFCF7] text-[#172554] transition-colors duration-200 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#7C3AED]";
+  "grid size-11 cursor-pointer place-items-center rounded-xl border border-[#E5E7EB] bg-[#FFFCF7] text-[#172554] " +
+  "transition-all duration-200 ease-out " +
+  "hover:-translate-y-0.5 hover:scale-105 active:scale-95 " +
+  "focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#7C3AED]";
 
 export function SocialLinks() {
   const [activePlaceholder, setActivePlaceholder] = useState<string | null>(
@@ -94,20 +97,17 @@ export function SocialLinks() {
         {socialItems.map((item) => (
           <li key={item.id}>
             {item.href ? (
-              <motion.a
+              <a
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Visit Surhires on ${item.name}`}
-                whileHover={{ y: -2.5, scale: 1.06 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ duration: 0.18, ease: "easeOut" }}
-                className={`${sharedButtonClasses} ${item.hoverClasses}`}
+                className={cn(sharedButtonClasses, item.hoverClasses)}
               >
                 {item.icon}
-              </motion.a>
+              </a>
             ) : (
-              <motion.button
+              <button
                 type="button"
                 aria-label={`${item.name} profile placeholder (demo site — external social URL not configured)`}
                 onClick={() =>
@@ -115,13 +115,10 @@ export function SocialLinks() {
                     prev === item.name ? null : item.name,
                   )
                 }
-                whileHover={{ y: -2.5, scale: 1.06 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ duration: 0.18, ease: "easeOut" }}
-                className={`${sharedButtonClasses} ${item.hoverClasses}`}
+                className={cn(sharedButtonClasses, item.hoverClasses)}
               >
                 {item.icon}
-              </motion.button>
+              </button>
             )}
           </li>
         ))}

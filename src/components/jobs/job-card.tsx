@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import type { AccentTone, Job } from "@/types";
 import { Badge, type BadgeTone } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -18,7 +19,7 @@ const typeBadgeTone: Record<Job["type"], BadgeTone> = {
   "Part-time": "sunshine",
 };
 
-function CategoryGlyph({ category }: { category: string }) {
+const CategoryGlyph = memo(({ category }: { category: string }) => {
   if (category === "Engineering") {
     return (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="size-5">
@@ -47,15 +48,17 @@ function CategoryGlyph({ category }: { category: string }) {
       <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 19a8 8 0 0 1 16 0" />
     </svg>
   );
-}
+});
 
-export function JobCard({
+CategoryGlyph.displayName = "CategoryGlyph";
+
+export const JobCard = memo(({
   job,
   onSelect,
 }: {
   job: Job;
   onSelect: (job: Job, triggerEl: HTMLButtonElement) => void;
-}) {
+}) => {
   return (
     <article className="group flex h-full flex-col rounded-[22px] border border-[#E5E7EB] bg-white p-6 shadow-[0_8px_30px_-18px_rgba(23,37,84,0.12)] transition-all duration-200 ease-out hover:-translate-y-1 hover:border-[#7C3AED]/45 hover:shadow-[0_20px_40px_-20px_rgba(124,58,237,0.24)]">
       <div className="flex items-start justify-between gap-3">
@@ -147,4 +150,6 @@ export function JobCard({
       </div>
     </article>
   );
-}
+});
+
+JobCard.displayName = "JobCard";

@@ -66,8 +66,8 @@ export default function EmployersPage() {
 
         <Container className="relative z-10">
           <div className="grid items-center gap-12 lg:grid-cols-[1.12fr_0.88fr]">
-            <div className="animate-fade-up">
-              <Badge tone="violet" dot>
+            <div>
+              <Badge tone="violet" dot className="animate-fade-up">
                 For growing hiring teams
               </Badge>
 
@@ -78,13 +78,13 @@ export default function EmployersPage() {
                 Meet the people who move your business forward
               </h1>
 
-              <p className="mt-5 max-w-[58ch] text-base leading-relaxed text-[#596579] sm:text-lg">
+              <p className="animate-fade-up delay-75 mt-5 max-w-[58ch] text-base leading-relaxed text-[#596579] sm:text-lg">
                 Publish a structured role brief once and connect with motivated
                 candidates across engineering, design, data, and operations —
                 without drowning in mismatched applications.
               </p>
 
-              <div className="mt-8 flex flex-col gap-3.5 sm:flex-row">
+              <div className="animate-fade-up delay-150 mt-8 flex flex-col gap-3.5 sm:flex-row">
                 <ButtonLink href="#post-a-job" variant="primary" size="lg">
                   Post a Job
                 </ButtonLink>
