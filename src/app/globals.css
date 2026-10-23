@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Class-based dark mode so `dark:` utilities respond to <html class="dark"> */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* --------------------------------------------------------------------------
    Surhires — Colorful UI/UX Design System Tokens
    -------------------------------------------------------------------------- */
@@ -128,13 +131,17 @@ h4 {
 /* --------------------------------------------------------------------------
    Motion & Animation System (GPU opacity + transform only)
    -------------------------------------------------------------------------- */
-@keyframes fadeUp {
+/* Entrance motion for above-the-fold content.
+   Opacity is deliberately not animated from `0` here: a fully transparent
+   element is not painted, so the browser cannot record the hero headline as a
+   Largest Contentful Paint candidate until the animation runs. Animating the
+   transform alone keeps the same "rise into place" feel while allowing the
+   hero to paint on the very first frame. */
+@keyframes riseIn {
   from {
-    opacity: 0;
     transform: translate3d(0, 16px, 0);
   }
   to {
-    opacity: 1;
     transform: translate3d(0, 0, 0);
   }
 }
@@ -170,8 +177,8 @@ h4 {
   }
 }
 
-.animate-fade-up {
-  animation: fadeUp 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
+.animate-rise {
+  animation: riseIn 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .animate-scale-in {
@@ -225,4 +232,358 @@ h4 {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* --------------------------------------------------------------------------
+   Dark theme
+   --------------------------------------------------------------------------
+   The components in this project hardcode the light palette (bg-white,
+   text-[#172554], border-[#E5E7EB], ...) instead of the semantic tokens
+   above, so a token swap alone would not retheme them. The rules below remap
+   those literal utility classes whenever <html class="dark"> is present.
+
+   Notes for maintainers:
+   - These rules are intentionally left OUTSIDE @layer so they win over
+     Tailwind's utilities layer regardless of specificity.
+   - [class~="..."] matches one exact class token, so variants such as
+     `hover:bg-[#F4F3FF]` and `bg-white/90` are separate tokens and are each
+     listed explicitly.
+   - Vivid brand colors (violet, teal, coral buttons, gradients) are left
+     untouched because they already read correctly on dark surfaces.
+   - New components should reuse these same literal classes, or use the
+     semantic tokens, which are also remapped below.
+   -------------------------------------------------------------------------- */
+.dark {
+  color-scheme: dark;
+
+  /* Documented design tokens, retuned for dark surfaces */
+  --color-canvas: #0b1020;
+  --color-surface: #141b30;
+  --color-surface-muted: #1c2540;
+  --color-text-primary: #e8edfb;
+  --color-text-secondary: #a6b1cd;
+  --color-border-subtle: #2a3450;
+  --color-brand-950: #f2f5ff;
+  --color-brand-800: #c7d2fe;
+  --color-violet-600: #a78bfa;
+  --color-violet-700: #c4b5fd;
+  --color-violet-100: #2a2158;
+  --color-teal-600: #2dd4bf;
+  --color-teal-700: #5eead4;
+  --color-teal-100: #123b3a;
+  --color-coral-500: #fb8f7c;
+  --color-coral-100: #4a2119;
+  --color-sunshine-400: #fde047;
+  --color-sunshine-100: #463a10;
+  --color-success: #4ade80;
+  --color-success-soft: #10321f;
+  --color-error: #f87171;
+  --color-error-soft: #3d1616;
+}
+
+/* Surfaces: cards, panels, navbar, modal, form controls */
+.dark [class~="bg-white"] {
+  background-color: #141b30;
+}
+.dark [class~="bg-white/90"] {
+  background-color: rgb(20 27 48 / 90%);
+}
+.dark [class~="bg-white/95"] {
+  background-color: rgb(20 27 48 / 95%);
+}
+.dark [class~="bg-white/85"] {
+  background-color: rgb(20 27 48 / 85%);
+}
+.dark [class~="bg-white/75"] {
+  background-color: rgb(20 27 48 / 75%);
+}
+.dark [class~="focus:bg-white"]:focus {
+  background-color: #141b30;
+}
+.dark [class~="bg-[#FFFCF7]"] {
+  background-color: #0b1020;
+}
+.dark [class~="bg-[#FFFCF7]/92"] {
+  background-color: rgb(11 16 32 / 92%);
+}
+.dark [class~="bg-[#F4F3FF]"] {
+  background-color: #1c2540;
+}
+.dark [class~="bg-[#F4F3FF]/60"] {
+  background-color: rgb(28 37 64 / 60%);
+}
+.dark [class~="hover:bg-[#F4F3FF]"]:hover {
+  background-color: #232d4d;
+}
+.dark [class~="target:bg-[#F4F3FF]"]:target {
+  background-color: #1c2540;
+}
+
+/* Soft accent tints: violet */
+.dark [class~="bg-[#EDE9FE]"] {
+  background-color: #2a2158;
+}
+.dark [class~="bg-[#EDE9FE]/55"] {
+  background-color: rgb(42 33 88 / 55%);
+}
+.dark [class~="bg-[#EDE9FE]/80"] {
+  background-color: rgb(42 33 88 / 80%);
+}
+.dark [class~="hover:bg-[#EDE9FE]"]:hover,
+.dark [class~="active:bg-[#EDE9FE]"]:active {
+  background-color: #342a68;
+}
+
+/* Soft accent tints: teal */
+.dark [class~="bg-[#CCFBF1]"] {
+  background-color: #123b3a;
+}
+.dark [class~="bg-[#CCFBF1]/45"],
+.dark [class~="hover:bg-[#CCFBF1]/45"]:hover {
+  background-color: rgb(18 59 58 / 45%);
+}
+.dark [class~="bg-[#CCFBF1]/60"],
+.dark [class~="hover:bg-[#CCFBF1]/60"]:hover {
+  background-color: rgb(18 59 58 / 60%);
+}
+.dark [class~="bg-[#CCFBF1]/75"] {
+  background-color: rgb(18 59 58 / 75%);
+}
+.dark [class~="bg-[#CCFBF1]/80"] {
+  background-color: rgb(18 59 58 / 80%);
+}
+.dark [class~="hover:bg-[#CCFBF1]"]:hover,
+.dark [class~="active:bg-[#CCFBF1]"]:active {
+  background-color: #174a48;
+}
+
+/* Soft accent tints: coral, sunshine, success, error */
+.dark [class~="bg-[#FFE4DE]"] {
+  background-color: #4a2119;
+}
+.dark [class~="bg-[#FFE4DE]/80"] {
+  background-color: rgb(74 33 25 / 80%);
+}
+.dark [class~="hover:bg-[#FFE4DE]"]:hover {
+  background-color: #5a2a20;
+}
+.dark [class~="bg-[#FEF9C3]"] {
+  background-color: #463a10;
+}
+.dark [class~="bg-[#DCFCE7]"] {
+  background-color: #10321f;
+}
+.dark [class~="bg-[#DCFCE7]/65"] {
+  background-color: rgb(16 50 31 / 65%);
+}
+.dark [class~="hover:bg-[#DCFCE7]"]:hover {
+  background-color: #164a2d;
+}
+.dark [class~="bg-[#FEE2E2]/25"] {
+  background-color: rgb(61 22 22 / 45%);
+}
+.dark [class~="bg-[#FEE2E2]/20"] {
+  background-color: rgb(61 22 22 / 40%);
+}
+
+/* Navy tints: avatar tiles need to lighten, the modal scrim needs to deepen */
+.dark [class~="bg-[#172554]/10"] {
+  background-color: rgb(255 255 255 / 10%);
+}
+.dark [class~="bg-[#172554]/55"] {
+  background-color: rgb(3 6 18 / 70%);
+}
+
+/* Faint vivid tints would disappear on dark surfaces, so they are lifted */
+.dark [class~="bg-[#7C3AED]/10"] {
+  background-color: rgb(167 139 250 / 16%);
+}
+.dark [class~="bg-[#7C3AED]/12"] {
+  background-color: rgb(167 139 250 / 18%);
+}
+.dark [class~="bg-[#0D9488]/10"] {
+  background-color: rgb(45 212 191 / 14%);
+}
+.dark [class~="bg-[#0D9488]/14"] {
+  background-color: rgb(45 212 191 / 18%);
+}
+.dark [class~="bg-[#F97360]/14"] {
+  background-color: rgb(251 143 124 / 18%);
+}
+.dark [class~="bg-[#FACC15]/20"] {
+  background-color: rgb(250 204 21 / 18%);
+}
+
+/* Borders, rings and dividers */
+.dark [class~="border-[#E5E7EB]"] {
+  border-color: #2a3450;
+}
+.dark [class~="border-[#E5E7EB]/80"] {
+  border-color: rgb(42 52 80 / 80%);
+}
+.dark [class~="border-[#E5E7EB]/85"] {
+  border-color: rgb(42 52 80 / 85%);
+}
+.dark [class~="ring-[#E5E7EB]"] {
+  --tw-ring-color: #2a3450;
+}
+.dark [class~="divide-[#E5E7EB]"] > :not(:last-child) {
+  border-color: #2a3450;
+}
+.dark [class~="border-[#DDD6FE]"] {
+  border-color: #3f3475;
+}
+.dark [class~="border-[#99F6E4]"] {
+  border-color: #1f5a56;
+}
+.dark [class~="border-[#CBD5E1]"] {
+  border-color: #3a4560;
+}
+.dark [class~="border-[#FECACA]"] {
+  border-color: #5c2626;
+}
+.dark [class~="border-[#FDE047]"] {
+  border-color: #6b5a12;
+}
+.dark [class~="border-white/80"],
+.dark [class~="border-white/85"] {
+  border-color: rgb(255 255 255 / 14%);
+}
+.dark [class~="focus-visible:outline-[#7C3AED]"]:focus-visible {
+  outline-color: #a78bfa;
+}
+
+/* Text: neutral */
+.dark [class~="text-[#172554]"] {
+  color: #eef2ff;
+}
+.dark [class~="hover:text-[#172554]"]:hover {
+  color: #ffffff;
+}
+.dark [class~="text-[#172033]"] {
+  color: #e8edfb;
+}
+.dark [class~="text-[#596579]"] {
+  color: #a6b1cd;
+}
+.dark [class~="placeholder:text-[#6B7280]"]::placeholder {
+  color: #7b87a3;
+}
+.dark [class~="text-[#94A3B8]"] {
+  color: #7b87a3;
+}
+.dark [class~="hover:text-[#1E3A8A]"]:hover {
+  color: #c7d2fe;
+}
+
+/* Text: accent inks that sit on the soft tints above */
+.dark [class~="text-[#6D28D9]"] {
+  color: #c4b5fd;
+}
+.dark [class~="hover:text-[#6D28D9]"]:hover {
+  color: #ddd6fe;
+}
+.dark .group:hover [class~="group-hover:text-[#6D28D9]"] {
+  color: #ddd6fe;
+}
+.dark [class~="text-[#5B21B6]"] {
+  color: #c4b5fd;
+}
+.dark [class~="hover:text-[#5B21B6]"]:hover {
+  color: #ddd6fe;
+}
+.dark [class~="text-[#7C3AED]"] {
+  color: #a78bfa;
+}
+.dark [class~="text-[#7C3AED]/35"] {
+  color: rgb(167 139 250 / 45%);
+}
+.dark [class~="hover:text-[#7C3AED]"]:hover {
+  color: #c4b5fd;
+}
+.dark .group:hover [class~="group-hover:text-[#7C3AED]"] {
+  color: #c4b5fd;
+}
+.dark [class~="text-[#0F766E]"] {
+  color: #5eead4;
+}
+.dark [class~="text-[#115E59]"] {
+  color: #5eead4;
+}
+.dark [class~="text-[#0D9488]"] {
+  color: #2dd4bf;
+}
+.dark [class~="hover:text-[#0F766E]"]:hover {
+  color: #99f6e4;
+}
+.dark .group:hover [class~="group-hover:text-[#0F766E]"] {
+  color: #99f6e4;
+}
+.dark [class~="text-[#15803D]"] {
+  color: #4ade80;
+}
+.dark [class~="text-[#14532D]"] {
+  color: #86efac;
+}
+.dark [class~="text-[#B91C1C]"] {
+  color: #f87171;
+}
+.dark [class~="text-[#C2410C]"] {
+  color: #fdba74;
+}
+.dark [class~="hover:text-[#C2410C]"]:hover {
+  color: #fed7aa;
+}
+.dark [class~="text-[#9A3412]"] {
+  color: #fdba74;
+}
+.dark [class~="text-[#CA8A04]"] {
+  color: #fde047;
+}
+.dark [class~="text-[#854D0E]"] {
+  color: #fde047;
+}
+.dark [class~="text-[#A16207]"] {
+  color: #fde047;
+}
+
+/* Gradient stops used by panels, cards and icon tiles */
+.dark [class~="from-[#EDE9FE]"] {
+  --tw-gradient-from: #2a2158;
+}
+.dark [class~="from-[#EDE9FE]/80"] {
+  --tw-gradient-from: rgb(42 33 88 / 80%);
+}
+.dark [class~="from-[#F4F3FF]"] {
+  --tw-gradient-from: #1c2540;
+}
+.dark [class~="to-[#F4F3FF]"] {
+  --tw-gradient-to: #1c2540;
+}
+.dark [class~="to-[#CCFBF1]"] {
+  --tw-gradient-to: #123b3a;
+}
+.dark [class~="to-[#CCFBF1]/45"] {
+  --tw-gradient-to: rgb(18 59 58 / 45%);
+}
+.dark [class~="to-[#CCFBF1]/35"] {
+  --tw-gradient-to: rgb(18 59 58 / 35%);
+}
+.dark [class~="from-white"] {
+  --tw-gradient-from: #141b30;
+}
+.dark [class~="via-white"] {
+  --tw-gradient-via: #141b30;
+}
+.dark [class~="from-[#DCFCE7]/55"] {
+  --tw-gradient-from: rgb(16 50 31 / 55%);
+}
+
+/* Signature decorative washes */
+.dark .bg-hero-wash {
+  background: linear-gradient(135deg, #241a4d 0%, #123b3a 55%, #0b1020 100%);
+}
+
+.dark .bg-employer-wash {
+  background: linear-gradient(135deg, #241a4d 0%, #161d38 52%, #123b3a 100%);
 }

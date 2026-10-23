@@ -27,7 +27,7 @@ export function HeroSection() {
       <Container className="relative z-10">
         <div className="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14">
           {/* Left column: Reading order -> Eyebrow, Headline, Copy, CTAs, Compact Search */}
-          <div className="animate-fade-up">
+          <div className="animate-rise">
             <Badge tone="violet" dot>
               A better way to find your next opportunity
             </Badge>
@@ -111,7 +111,7 @@ export function HeroSection() {
           </div>
 
           {/* Right column: Original Composed Candidate & Opportunity UI Stack */}
-          <div className="animate-fade-up delay-150 relative mx-auto w-full max-w-[520px] lg:max-w-none">
+          <div className="animate-rise delay-150 relative mx-auto w-full max-w-[520px] lg:max-w-none">
             {/* Decorative geometric accents behind card composition */}
             <div
               aria-hidden="true"

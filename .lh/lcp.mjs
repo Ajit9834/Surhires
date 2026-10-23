@@ -1,0 +1,11 @@
+import { readFileSync } from "node:fs";
+const r = JSON.parse(readFileSync(process.argv[2], "utf8"));
+const a = r.audits;
+const lcpEl = a["largest-contentful-paint-element"];
+console.log(JSON.stringify(lcpEl?.details, null, 1).slice(0, 4000));
+console.log("---- render blocking ----");
+console.log(JSON.stringify(a["render-blocking-resources"]?.details?.items, null, 1).slice(0, 2000));
+console.log("---- network tree ----");
+console.log(JSON.stringify(a["network-dependency-tree-insight"]?.details, null, 1).slice(0, 2500));
+console.log("---- forced reflow ----");
+console.log(JSON.stringify(a["forced-reflow-insight"]?.details, null, 1).slice(0, 1500));

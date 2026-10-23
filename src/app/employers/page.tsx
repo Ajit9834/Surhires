@@ -66,7 +66,7 @@ export default function EmployersPage() {
 
         <Container className="relative z-10">
           <div className="grid items-center gap-12 lg:grid-cols-[1.12fr_0.88fr]">
-            <div className="animate-fade-up">
+            <div className="animate-rise">
               <Badge tone="violet" dot>
                 For growing hiring teams
               </Badge>
@@ -95,7 +95,7 @@ export default function EmployersPage() {
             </div>
 
             {/* Right column: Hiring Funnel Snapshot Card */}
-            <div className="animate-fade-up delay-150 rounded-[26px] border border-white/85 bg-white/85 p-6 shadow-[0_24px_54px_-26px_rgba(23,37,84,0.3)] backdrop-blur-md sm:p-7">
+            <div className="animate-rise delay-150 rounded-[26px] border border-white/85 bg-white/85 p-6 shadow-[0_24px_54px_-26px_rgba(23,37,84,0.3)] backdrop-blur-md sm:p-7">
               <div className="flex items-center justify-between gap-2 border-b border-[#E5E7EB] pb-4">
                 <div>
                   <p className="text-xs font-semibold text-[#7C3AED]">
